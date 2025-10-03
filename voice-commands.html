@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Commands - GestureAI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">GestureAI</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="hand-gestures.html">Hand Gestures</a></li>
+            <li><a href="eye-tracking.html">Eye Tracking</a></li>
+        </ul>
+    </nav>
+
+    <div class="feature-page">
+        <div class="feature-content">
+            <h1>Voice Command Control</h1>
+            <div class="voice-control-container">
+                <button id="startVoice" class="control-button">
+                    <i class="fas fa-microphone"></i>
+                    Start Voice Recognition
+                </button>
+                <div class="gesture-guide">
+                    <h3>Available Commands</h3>
+                    <div class="gesture-guide-item">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>"Scroll Up"</span>
+                    </div>
+                    <div class="gesture-guide-item">
+                        <i class="fas fa-arrow-down"></i>
+                        <span>"Scroll Down"</span>
+                    </div>
+                </div>
+            </div>
+            <div id="output" class="status-output">
+                Status: Waiting for voice commands...
+            </div>
+        </div>
+    </div>
+    <script src="voice-commands.js"></script>
+</body>
+</html> 

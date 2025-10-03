@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gesture Control Interface</title>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1646424915/hands.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="loader">
+        <div class="loader-content">
+            <div class="loader-spinner"></div>
+            <p>Loading amazing features...</p>
+        </div>
+    </div>
+
+    <div class="progress-bar"></div>
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <div class="landing-container">
+        <header class="hero">
+            <nav>
+                <div class="logo">GestureAI</div>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#tutorial">Tutorial</a></li>
+                </ul>
+            </nav>
+            <div class="hero-content">
+                <h1>Control Your World With Gestures</h1>
+                <p>Experience the future of human-computer interaction with hand gestures, eye tracking, and voice commands.</p>
+                <a href="hand-gestures.html" class="start-button">
+                    Start Your Journey
+                    <i class="fas fa-hand-paper"></i>
+                </a>
+            </div>
+        </header>
+
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <h2>Key Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <i class="fas fa-hand-paper"></i>
+                    <h3>Hand Gestures</h3>
+                    <p>Control your device with intuitive hand movements</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-eye"></i>
+                    <h3>Eye Tracking</h3>
+                    <p>Navigate with natural eye movements</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-microphone"></i>
+                    <h3>Voice Commands</h3>
+                    <p>Speak naturally to control your device</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Feature Demo Sections -->
+        <section id="hand-gestures-demo" class="feature-demo hidden">
+            <div class="demo-container">
+                <button class="close-demo">×</button>
+                <h2>Hand Gesture Controls</h2>
+                <div class="video-container">
+                    <video id="handVideo" playsinline></video>
+                </div>
+                <div class="gesture-guide">
+                    <h3>Available Gestures</h3>
+                    <div class="gesture-guide-item">
+                        <i class="fas fa-peace"></i>
+                        <span>Peace Sign: Activate/Deactivate</span>
+                    </div>
+                    <div class="gesture-guide-item">
+                        <i class="fas fa-hand-paper"></i>
+                        <span>Open Palm: Scroll Mode</span>
+                    </div>
+                    <div class="gesture-guide-item">
+                        <i class="fas fa-hand-rock"></i>
+                        <span>Fist: Cancel Gesture</span>
+                    </div>
+                </div>
+                <div id="hand-status" class="status-output"></div>
+            </div>
+        </section>
+
+        <section id="eye-tracking-demo" class="feature-demo hidden">
+            <div class="demo-container">
+                <button class="close-demo">×</button>
+                <h2>Eye Tracking Controls</h2>
+                <div class="video-container">
+                    <video id="eyeVideo" playsinline></video>
+                </div>
+                <div class="gesture-guide">
+                    <h3>Eye Movements</h3>
+                    <div class="gesture-guide-item">
+                        <i class="fas fa-eye-slash"></i>
+                        <span>Blink: Click Action</span>
+                    </div>
+                    <div class="gesture-guide-item">
+                        <i class="fas fa-arrows-alt-h"></i>
+                        <span>Look Left/Right: Navigation</span>
+                    </div>
+                </div>
+                <div id="eye-status" class="status-output"></div>
+            </div>
+        </section>
+
+        <section id="voice-commands-demo" class="feature-demo hidden">
+            <div class="demo-container">
+                <button class="close-demo">×</button>
+                <h2>Voice Command Controls</h2>
+                <div class="voice-controls">
+                    <button id="startVoice" class="control-button">
+                        <i class="fas fa-microphone"></i>
+                        Start Voice Recognition
+                    </button>
+                    <div class="gesture-guide">
+                        <h3>Available Commands</h3>
+                        <div class="gesture-guide-item">
+                            <i class="fas fa-arrow-up"></i>
+                            <span>"Scroll Up"</span>
+                        </div>
+                        <div class="gesture-guide-item">
+                            <i class="fas fa-arrow-down"></i>
+                            <span>"Scroll Down"</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="voice-status" class="status-output"></div>
+            </div>
+        </section>
+    </div>
+
+    <div class="gesture-feedback" style="display: none;">
+        <div class="feedback-message">
+            <i class="fas fa-check-circle"></i>
+            <span>Gesture detected!</span>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html> 

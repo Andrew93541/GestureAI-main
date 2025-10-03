@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hand Gestures - GestureAI</title>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1646424915/hands.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">GestureAI</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="eye-tracking.html">Eye Tracking</a></li>
+            <li><a href="voice-commands.html">Voice Commands</a></li>
+        </ul>
+    </nav>
+
+    <div class="feature-page">
+        <div class="feature-content">
+            <h1>Hand Gesture Control</h1>
+            <div class="video-container">
+                <video id="videoElement" playsinline></video>
+            </div>
+            <div class="gesture-guide">
+                <h3>Available Gestures</h3>
+                <div class="gesture-guide-item">
+                    <i class="fas fa-peace"></i>
+                    <span>Peace Sign: Activate/Deactivate</span>
+                </div>
+                <div class="gesture-guide-item">
+                    <i class="fas fa-hand-paper"></i>
+                    <span>Open Palm: Scroll Mode</span>
+                </div>
+                <div class="gesture-guide-item">
+                    <i class="fas fa-hand-rock"></i>
+                    <span>Fist: Cancel Gesture</span>
+                </div>
+            </div>
+            <div id="output" class="status-output">
+                Status: Waiting for gestures...
+            </div>
+        </div>
+    </div>
+    <script src="hand-gestures.js"></script>
+</body>
+</html> 
