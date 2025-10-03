@@ -6,41 +6,176 @@
     <title>Eye Tracking - GestureAI</title>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/face_mesh.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles-enhanced.css">
 </head>
 <body>
-    <nav>
-        <div class="logo">GestureAI</div>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="hand-gestures.html">Hand Gestures</a></li>
-            <li><a href="voice-commands.html">Voice Commands</a></li>
-        </ul>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-hand-sparkles"></i>
+                GestureAI
+            </a>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="hand-gestures.html" class="nav-link">Hand Gestures</a>
+                <a href="eye-tracking.html" class="nav-link active">Eye Tracking</a>
+                <a href="voice-commands.html" class="nav-link">Voice Commands</a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
     </nav>
 
     <div class="feature-page">
         <div class="feature-content">
-            <h1>Eye Tracking Control</h1>
+            <div class="feature-header">
+                <h1>
+                    <i class="fas fa-eye"></i>
+                    Eye Tracking Control
+                </h1>
+                <p>Navigate with natural eye movements and blinks. Perfect for hands-free interaction and accessibility.</p>
+            </div>
+
+            <div class="control-panel">
+                <button id="startCamera" class="control-button">
+                    <i class="fas fa-video"></i>
+                    Start Eye Tracking
+                </button>
+                <button id="stopCamera" class="control-button" style="display: none;">
+                    <i class="fas fa-video-slash"></i>
+                    Stop Tracking
+                </button>
+                <button id="calibrate" class="control-button" style="display: none;">
+                    <i class="fas fa-crosshairs"></i>
+                    Calibrate
+                </button>
+            </div>
+
             <div class="video-container">
                 <video id="videoElement" playsinline></video>
+                <div class="video-overlay">
+                    <div class="eye-indicator left-eye">
+                        <div class="eye-dot"></div>
+                    </div>
+                    <div class="eye-indicator right-eye">
+                        <div class="eye-dot"></div>
+                    </div>
+                    <div class="gaze-cursor" id="gazeCursor"></div>
+                </div>
             </div>
+
             <div class="gesture-guide">
-                <h3>Eye Controls</h3>
-                <div class="gesture-guide-item">
-                    <i class="fas fa-eye-slash"></i>
-                    <span>Blink: Click Action</span>
-                </div>
-                <div class="gesture-guide-item">
-                    <i class="fas fa-arrows-alt-h"></i>
-                    <span>Look Left/Right: Navigation</span>
+                <h3>
+                    <i class="fas fa-eye"></i>
+                    Eye Controls
+                </h3>
+                <div class="gestures-grid">
+                    <div class="gesture-guide-item">
+                        <div class="gesture-icon">
+                            <i class="fas fa-eye-slash"></i>
+                        </div>
+                        <div class="gesture-info">
+                            <h4>Blink Detection</h4>
+                            <p>Single blink to click, double blink for right-click</p>
+                        </div>
+                    </div>
+                    <div class="gesture-guide-item">
+                        <div class="gesture-icon">
+                            <i class="fas fa-arrows-alt-h"></i>
+                        </div>
+                        <div class="gesture-info">
+                            <h4>Horizontal Gaze</h4>
+                            <p>Look left/right to navigate horizontally</p>
+                        </div>
+                    </div>
+                    <div class="gesture-guide-item">
+                        <div class="gesture-icon">
+                            <i class="fas fa-arrows-alt-v"></i>
+                        </div>
+                        <div class="gesture-info">
+                            <h4>Vertical Gaze</h4>
+                            <p>Look up/down to scroll or navigate vertically</p>
+                        </div>
+                    </div>
+                    <div class="gesture-guide-item">
+                        <div class="gesture-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <div class="gesture-info">
+                            <h4>Focus Tracking</h4>
+                            <p>Maintain focus on elements for selection</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div id="output" class="status-output">
-                Status: Waiting for eye movements...
+
+            <div class="calibration-panel" id="calibrationPanel" style="display: none;">
+                <h3>
+                    <i class="fas fa-crosshairs"></i>
+                    Eye Tracking Calibration
+                </h3>
+                <p>Look at each point when it appears and blink to confirm</p>
+                <div class="calibration-points">
+                    <div class="calibration-point" data-point="1"></div>
+                    <div class="calibration-point" data-point="2"></div>
+                    <div class="calibration-point" data-point="3"></div>
+                    <div class="calibration-point" data-point="4"></div>
+                    <div class="calibration-point" data-point="5"></div>
+                </div>
+            </div>
+
+            <div class="status-panel">
+                <div class="status-header">
+                    <i class="fas fa-info-circle"></i>
+                    <h3>Status</h3>
+                </div>
+                <div id="output" class="status-output">
+                    <div class="status-indicator">
+                        <div class="pulse-dot"></div>
+                        <span>Ready to track eye movements...</span>
+                    </div>
+                </div>
+                <div class="eye-metrics">
+                    <div class="metric">
+                        <span class="metric-label">Blink Rate:</span>
+                        <span class="metric-value" id="blinkRate">0 /min</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Gaze Accuracy:</span>
+                        <span class="metric-value" id="gazeAccuracy">--</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation-buttons">
+                <a href="index.html" class="nav-btn">
+                    <i class="fas fa-home"></i>
+                    Back to Home
+                </a>
+                <a href="hand-gestures.html" class="nav-btn">
+                    <i class="fas fa-hand-paper"></i>
+                    Try Hand Gestures
+                </a>
+                <a href="voice-commands.html" class="nav-btn">
+                    <i class="fas fa-microphone"></i>
+                    Try Voice Commands
+                </a>
             </div>
         </div>
     </div>
+
+    <div class="gesture-feedback" id="gestureFeedback">
+        <div class="feedback-content">
+            <i class="fas fa-eye"></i>
+            <span>Eye Movement Detected!</span>
+        </div>
+    </div>
+
     <script src="eye-tracking.js"></script>
 </body>
 </html> 

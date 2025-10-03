@@ -6,45 +6,144 @@
     <title>Hand Gestures - GestureAI</title>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1646424915/hands.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles-enhanced.css">
 </head>
 <body>
-    <nav>
-        <div class="logo">GestureAI</div>
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="eye-tracking.html">Eye Tracking</a></li>
-            <li><a href="voice-commands.html">Voice Commands</a></li>
-        </ul>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-hand-sparkles"></i>
+                GestureAI
+            </a>
+            <div class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="hand-gestures.html" class="nav-link active">Hand Gestures</a>
+                <a href="eye-tracking.html" class="nav-link">Eye Tracking</a>
+                <a href="voice-commands.html" class="nav-link">Voice Commands</a>
+            </div>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
     </nav>
 
     <div class="feature-page">
         <div class="feature-content">
-            <h1>Hand Gesture Control</h1>
+            <div class="feature-header">
+                <h1>
+                    <i class="fas fa-hand-paper"></i>
+                    Hand Gesture Control
+                </h1>
+                <p>Control your device with intuitive hand movements. Make gestures in front of your camera to interact naturally.</p>
+            </div>
+
+            <div class="control-panel">
+                <button id="startCamera" class="control-button">
+                    <i class="fas fa-video"></i>
+                    Start Camera
+                </button>
+                <button id="stopCamera" class="control-button" style="display: none;">
+                    <i class="fas fa-video-slash"></i>
+                    Stop Camera
+                </button>
+            </div>
+
             <div class="video-container">
                 <video id="videoElement" playsinline></video>
+                <div class="video-overlay">
+                    <div class="camera-status">
+                        <i class="fas fa-camera"></i>
+                        <span>Camera Ready</span>
+                    </div>
+                </div>
             </div>
+
             <div class="gesture-guide">
-                <h3>Available Gestures</h3>
-                <div class="gesture-guide-item">
-                    <i class="fas fa-peace"></i>
-                    <span>Peace Sign: Activate/Deactivate</span>
-                </div>
-                <div class="gesture-guide-item">
-                    <i class="fas fa-hand-paper"></i>
-                    <span>Open Palm: Scroll Mode</span>
-                </div>
-                <div class="gesture-guide-item">
-                    <i class="fas fa-hand-rock"></i>
-                    <span>Fist: Cancel Gesture</span>
+                <h3>
+                    <i class="fas fa-hand-point-right"></i>
+                    Available Gestures
+                </h3>
+                <div class="gestures-grid">
+                    <div class="gesture-guide-item">
+                        <div class="gesture-icon">
+                            <i class="fas fa-hand-peace"></i>
+                        </div>
+                        <div class="gesture-info">
+                            <h4>Peace Sign</h4>
+                            <p>Activate/Deactivate gesture recognition</p>
+                        </div>
+                    </div>
+                    <div class="gesture-guide-item">
+                        <div class="gesture-icon">
+                            <i class="fas fa-hand-paper"></i>
+                        </div>
+                        <div class="gesture-info">
+                            <h4>Open Palm</h4>
+                            <p>Enable scroll mode - move hand up/down</p>
+                        </div>
+                    </div>
+                    <div class="gesture-guide-item">
+                        <div class="gesture-icon">
+                            <i class="fas fa-hand-rock"></i>
+                        </div>
+                        <div class="gesture-info">
+                            <h4>Closed Fist</h4>
+                            <p>Cancel current gesture and stop scrolling</p>
+                        </div>
+                    </div>
+                    <div class="gesture-guide-item">
+                        <div class="gesture-icon">
+                            <i class="fas fa-hand-point-up"></i>
+                        </div>
+                        <div class="gesture-info">
+                            <h4>Pointing</h4>
+                            <p>Move cursor and click on elements</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div id="output" class="status-output">
-                Status: Waiting for gestures...
+
+            <div class="status-panel">
+                <div class="status-header">
+                    <i class="fas fa-info-circle"></i>
+                    <h3>Status</h3>
+                </div>
+                <div id="output" class="status-output">
+                    <div class="status-indicator">
+                        <div class="pulse-dot"></div>
+                        <span>Ready to detect gestures...</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navigation-buttons">
+                <a href="index.html" class="nav-btn">
+                    <i class="fas fa-home"></i>
+                    Back to Home
+                </a>
+                <a href="eye-tracking.html" class="nav-btn">
+                    <i class="fas fa-eye"></i>
+                    Try Eye Tracking
+                </a>
+                <a href="voice-commands.html" class="nav-btn">
+                    <i class="fas fa-microphone"></i>
+                    Try Voice Commands
+                </a>
             </div>
         </div>
     </div>
+
+    <div class="gesture-feedback" id="gestureFeedback">
+        <div class="feedback-content">
+            <i class="fas fa-check-circle"></i>
+            <span>Gesture Detected!</span>
+        </div>
+    </div>
+
     <script src="hand-gestures.js"></script>
 </body>
 </html> 
